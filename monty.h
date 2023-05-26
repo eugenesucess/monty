@@ -49,16 +49,16 @@ void (*f)(stack_t **stack, unsigned int line_number);
 typedef struct global_variable
 {
 FILE *file;
-int push_arg;
+char *arg;
 char *buffer;
-} global_var;
+unsigned int count;
+} gl_v;
+gl_v vars;
 
-extern global_var var_global;
-
-void read_file(char *filename, stack_t **stack);
-char *parse_line(char *line, stack_t **stack, unsigned int line_number);
-typedef void (*instruct_func)(stack_t **stack, unsigned int line_number);
-instruct_func get_op_func(char *str);
+void execute(stack_t **stack, int argc, char **argv);
+void freeVars();
+FILE *check_file(int arc, char **argv);
+void (*getopcode(char *opc))(stack_t **stack, unsigned int line_numner);
 
 /*Fuxntions Monty*/
 void _pall(stack_t **stack, unsigned int line_number);
