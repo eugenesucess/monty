@@ -10,7 +10,9 @@ stack_t *add_dnodeint_end(stack_t **head, const int n)
 	if (!temp)
 	{
 		dprintf(2, "Error: malloc failed\n");
-		free_vglo();
+		free(vars.buffer);
+		fclose(vars.file);
+		free(vars.arg);
 		exit(EXIT_FAILURE);
 	}
 	temp->n = n;
@@ -71,11 +73,13 @@ void _push(stack_t **doubly, unsigned int cline)
 {
 	int n, j;
 
-	if (!vglo.arg)
+	if (!vars.arg)
 	{
 		dprintf(2, "L%u: ", cline);
 		dprintf(2, "usage: push integer\n");
-		free_vglo();
+		free(vars.arg);
+		free(vars.buffer);
+		fclose(vras.file)
 		exit(EXIT_FAILURE);
 	}
 
