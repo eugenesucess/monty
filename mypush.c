@@ -43,7 +43,9 @@ stack_t *add_dnodeint(stack_t **head, const int n)
 	if (!temp)
 	{
 		dprintf(2, "Error: malloc failed\n");
-		free_vglo();
+		free(vars.arg);
+		free(vars.buffer);
+		fclose(vras.file)
 		exit(EXIT_FAILURE);
 	}
 	temp->n = n;
@@ -79,24 +81,26 @@ void _push(stack_t **doubly, unsigned int cline)
 		dprintf(2, "usage: push integer\n");
 		free(vars.arg);
 		free(vars.buffer);
-		fclose(vras.file)
+		fclose(vars.file);
 		exit(EXIT_FAILURE);
 	}
 
-	for (j = 0; vglo.arg[j] != '\0'; j++)
+	for (j = 0; vars.arg[j] != '\0'; j++)
 	{
 		if (!isdigit(vglo.arg[j]) && vglo.arg[j] != '-')
 		{
 			dprintf(2, "L%u: ", cline);
 			dprintf(2, "usage: push integer\n");
-			free_vglo();
+			free(vars.arg);
+			free(vars.buffer);
+			fclose(vars.file);
 			exit(EXIT_FAILURE);
 		}
 	}
 
-	n = atoi(vglo.arg);
+	n = atoi(vars.arg);
 
-	if (vglo.lifo == 1)
+	if (vars.lifi == 1)
 		add_dnodeint(doubly, n);
 	else
 		add_dnodeint_end(doubly, n);
