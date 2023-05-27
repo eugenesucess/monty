@@ -1,32 +1,5 @@
 #include "monty.h"
 
-void _push(stack_t **head, unsigned int counter)
-{
-	int n, j = 0, flag = 0;
-	if (vars.arg)
-	{
-		if (vars.arg[0] == '-')
-			j++;
-		for (; vars.arg[j] != '\0'; j++)
-		{
-			if (vars.arg[j] > 57 || vars.arg[j] < 48)
-				flag = 1;
-		}
-		if (flag == 1)
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", counter);
-			fclose(vars.file);
-			free(vars.buffer);
-			free_list(*head);
-			exit(EXIT_FAILURE);
-		}
-	}
-	n = atoi(vars.arg);
-	if (vars.lifi == 0)
-		addnode(head, n);
-	else
-		addqueue(head, n);
-}
 
 void _add(stack_t **head, unsigned int counter)
 {

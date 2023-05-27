@@ -13,22 +13,23 @@ void (*get_opcodes(char *opc))(stack_t **stack, unsigned int line_number)
 		{"pop", _pop},
 		{"swap", _swap},
 		{"add", _add},
-		{"nop", _nop
+		{"nop", _nop},
 		{NULL, NULL}
 	};
 	int i;
 
-	for (i = 0; instruct[i].opcode; i++)
+	for (i = 0; opcode[i].opcode; i++)
 	{
-		if (strcmp(instruct[i].opcode, opc) == 0)
+		if (strcmp(opcode[i].opcode, opc) == 0)
 			break;
 	}
 
-	return (instruct[i].f);
+	return (opcode[i].f);
 }
 	
 int main(int argc, char **argv)
 {
+	void (*f)(stack_t **stack, unsigned int line_number);
 	FILE *fd;
 	char *buffer, *opcode, *arg;
 	size_t size =0;
@@ -58,20 +59,26 @@ int main(int argc, char **argv)
 	{
 		line_count++;
 		opcode = strtok(buffer, " \t\n");
-		vars.opc = opcode; /*in order to use struct*/
-		f = get_opcodes(opcode);
-		if (!f)
+		if (!opcode)
 		{
-			fprintf(stderr, "L%u: ", line_count);
-			fprintf(stderr, "unknown instruction %s\n", opcode);
-			free(vars.buffer);
-			free(vars.file);
-			free(*head);
+			fprintf(stderr, "no");
 			exit(EXIT_FAILURE);
 		}
-		
-		vars.arg = strtok(NULL, " \t\n");
-		f(&head line_count);
+		vars.opc = opcode; /*in order to use struct*/
+		if (strcmp(opcode, "push") == 0)
+		{
+			arg = strtok(NULL, " \t\n");
+			if (!arg)
+			{
+				printf("pops\n");
+			}
+			_push(head, line_count);
+			printf("Holla %s\n", arg);
+		}
+		else if(strcmp(opcode, "pall") == 0)
+		{
+			printf("MAN");
+		}
 	}
 	vars.line_count = line_count;
 	printf("%d\n", line_count);
