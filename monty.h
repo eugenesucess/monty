@@ -48,18 +48,16 @@ void (*f)(stack_t **stack, unsigned int line_number);
 */
 typedef struct global_variable
 {
-FILE *file;
-char *arg;
-char *buffer;
-unsigned int count;
+	FILE *file;
+	char *arg;
+	char *buffer;
+	char *opc;
+	unsigned int line_count;
+	int lifi;
 } gl_v;
-gl_v vars;
-
-void execute(stack_t **stack, int argc, char **argv);
-void freeVars();
-FILE *check_file(int arc, char **argv);
-void (*getopcode(char *opc))(stack_t **stack, unsigned int line_numner);
-
+extern gl_v vars;
+void free_list(stack_t *head);
+int execute(stack_t **head, char *uffer, unsigned int count);
 /*Fuxntions Monty*/
 void _pall(stack_t **stack, unsigned int line_number);
 void _push(stack_t **stack, unsigned int line_number);
