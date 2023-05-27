@@ -1,6 +1,6 @@
 #include "monty.h"
 
-int execute (stack_t **head, char *content, unsigned int count)
+int execute (stack_t **head, char *content, unsigned int count, FILE *file)
 {
 	instruction_t opcode[] = {
 		{"push", _push},
@@ -21,11 +21,14 @@ int execute (stack_t **head, char *content, unsigned int count)
 			opcode[i].f(head, count);
 			return (0);
 		}
-		if ((strcmp(opcode[i].opcode, "push") == 0) && (vars.arg == NULL))
-		{
-			fprintf(stderr, "args not count");
-			exit(EXIT_FAILURE);
-		}
+	}
+	if (vars.opc && opcode[i].opcode == NULL)
+	{
+		 fprintf(stderr, "L%d: unknown instruction %s\n", count, vars.opc);
+		 fclose(file);
+		 free(content);
+		 free_list(*head);
+		 exit(EXIT_FAILURE);
 	}
 	return (1);
 }

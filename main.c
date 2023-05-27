@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 			free(buffer);
 			free(opcode);
 		}
-		execute(head, buffer, line_count);
+		execute(head, buffer, line_count, fd);
 		printf("%s\n", opcode);
 	}
 	vars.line_count = line_count;

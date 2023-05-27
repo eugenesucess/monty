@@ -55,9 +55,12 @@ typedef struct global_variable
 	unsigned int line_count;
 	int lifi;
 } gl_v;
+
+void addqueue(stack_t **head, int n);
+void addnode(stack_t **had, int n);
 extern gl_v vars;
 void free_list(stack_t *head);
-int execute(stack_t **head, char *uffer, unsigned int count);
+int execute(stack_t **head, char *uffer, unsigned int count, FILE *d);
 /*Fuxntions Monty*/
 void _pall(stack_t **stack, unsigned int line_number);
 void _push(stack_t **stack, unsigned int line_number);
