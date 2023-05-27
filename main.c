@@ -72,6 +72,7 @@ int main(int argc, char **argv)
 			{
 				printf("pops\n");
 			}
+			vars.arg = arg;
 			_push(head, line_count);
 			printf("Holla %s\n", arg);
 		}

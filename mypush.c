@@ -85,21 +85,8 @@ void _push(stack_t **doubly, unsigned int cline)
 		exit(EXIT_FAILURE);
 	}
 
-	for (j = 0; vars.arg[j] != '\0'; j++)
-	{
-		if (!isdigit(vars.arg[j]) && vars.arg[j] != '-')
-		{
-			dprintf(2, "L%u: ", cline);
-			dprintf(2, "usage: push integer\n");
-			free(vars.arg);
-			free(vars.buffer);
-			fclose(vars.file);
-			exit(EXIT_FAILURE);
-		}
-	}
 
 	n = atoi(vars.arg);
-
 	if (vars.lifi == 1)
 		add_dnodeint(doubly, n);
 	else

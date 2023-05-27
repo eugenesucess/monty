@@ -49,7 +49,7 @@ void (*f)(stack_t **stack, unsigned int line_number);
 typedef struct global_variable
 {
 	FILE *file;
-	char *arg;
+	char* arg;
 	char *buffer;
 	char *opc;
 	unsigned int line_count;
