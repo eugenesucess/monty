@@ -4,6 +4,29 @@
 #include <stdlib.h>
 
 gl_v vars;
+void (*get_opcodes(char *opc))(stack_t **stack, unsigned int line_number)
+{
+	instruction_t opcode[] = {
+		{"push", _push},
+		{"pall", _pall},
+		{"pint", _pint},
+		{"pop", _pop},
+		{"swap", _swap},
+		{"add", _add},
+		{"nop", _nop
+		{NULL, NULL}
+	};
+	int i;
+
+	for (i = 0; instruct[i].opcode; i++)
+	{
+		if (strcmp(instruct[i].opcode, opc) == 0)
+			break;
+	}
+
+	return (instruct[i].f);
+}
+	
 int main(int argc, char **argv)
 {
 	FILE *fd;
@@ -36,15 +59,19 @@ int main(int argc, char **argv)
 		line_count++;
 		opcode = strtok(buffer, " \t\n");
 		vars.opc = opcode; /*in order to use struct*/
-		if (opcode == NULL)
+		f = get_opcodes(opcode);
+		if (!f)
 		{
-			fprintf(stderr, "L<%u>: unknown instruction <%s>", line_count, opcode);
+			fprintf(stderr, "L%u: ", line_count);
+			fprintf(stderr, "unknown instruction %s\n", opcode);
+			free(vars.buffer);
+			free(vars.file);
+			free(*head);
 			exit(EXIT_FAILURE);
-			free(buffer);
-			free(opcode);
 		}
-		execute(head, buffer, line_count, fd);
-		printf("%s\n", opcode);
+		
+		vars.arg = strtok(NULL, " \t\n");
+		f(&head line_count);
 	}
 	vars.line_count = line_count;
 	printf("%d\n", line_count);
