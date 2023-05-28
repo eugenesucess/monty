@@ -35,7 +35,7 @@ typedef struct instruction_s
 
 int is_number(char *parsed);
 void check_open_file(char **argv);
-void (*get_opcode(char *parsed))(stack_t **top, unsigned int);
+void (*get_opcode(char *parsed, unsigned int line))(stack_t **top, unsigned int);
 
 void push_stack(stack_t **top, unsigned int line_number);
 void pall_stack(stack_t **top, unsigned int line_number);
