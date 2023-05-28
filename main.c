@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void check_input(int argc, char **argv)
 {  
@@ -20,12 +21,24 @@ void check_input(int argc, char **argv)
 int main(int argc, char **argv)
 {
 	size_t size;
-	char *buffer;
+	char *buffer, *token, *arg;
 	FILE *fd;
 	fd = fopen(argv[1], "r");
 	check_input(argc, argv);
 	while (getline(&buffer, &size, fd) != -1)
 	{
+		token = strtok(buffer, " t\r\n");
+		
+		if (strcmp(token, "push") == 0)
+		{
+			printf("I\'m going to push\n");
+			arg = strtok(NULL, " \t\r\n");
+			printf("my arg is %s\n", arg);
+		}
+		else
+		{
+			printf("Its not push\n");
+		}
 	printf("%s\n", buffer);
 	}
 	fclose(fd);
