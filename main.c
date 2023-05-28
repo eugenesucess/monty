@@ -1,5 +1,6 @@
 #include "monty.h"
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -37,9 +38,8 @@ int is_comment(char *token, int line_counter)
 }
 int main(int argc, char **argv)
 {
-	void (*p_func)(stack_t **, unsigned int);
 	size_t size;
-	char *buffer, *token, *arg, *command;
+	char *buffer, *token, *arg;
 	FILE *fd;
 	unsigned int line_count = 1;
 	stack_t *head = NULL;

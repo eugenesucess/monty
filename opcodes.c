@@ -8,15 +8,13 @@ int number;
 void (*get_opcode(char *parsed,  unsigned int line))(stack_t **top, unsigned int)
 {
 	int i = 0;
+	
 	instruction_t opt[] = {
 		{"push", push_stack},
 		{"pall", pall_stack},
-//		{"pint", pint_stack},
-//		{"pop", pop_stack},
-//		{"swap", _swap},
-//		{"nop", _nop},
 		{NULL, NULL}	
 	};
+	(void)line;
 	
 	while (opt[i].opcode != NULL)
 	{
@@ -33,7 +31,7 @@ void (*get_opcode(char *parsed,  unsigned int line))(stack_t **top, unsigned int
 	}
 	return NULL;
 }
-
+/*
 int is_number(char *parsed)
 {
 	int i;
@@ -47,4 +45,4 @@ int is_number(char *parsed)
 			return (-1);
 	}
 	return (1);
-}
+}*/

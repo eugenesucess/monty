@@ -6,8 +6,9 @@ int number;
 /*add node at the beg of the stack*/
 void push_stack(stack_t **top, unsigned int line_number)
 {
-	(void)line_number;
 	stack_t *newNode;
+
+	(void)line_number;
 	
 	newNode = malloc(sizeof(stack_t));
 	if (!newNode)

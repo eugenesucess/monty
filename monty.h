@@ -1,6 +1,6 @@
 #ifndef MONTY_H
 #define MONTY_H
-
+#include <stdio.h>
 #include <ctype.h>
 extern int n;
 /**
@@ -34,6 +34,8 @@ typedef struct instruction_s
 } instruction_t;
 
 int is_number(char *parsed);
+
+int getline(char **lineptr, size_t *n, FILE *fp);
 void check_open_file(char **argv);
 void (*get_opcode(char *parsed, unsigned int line))(stack_t **top, unsigned int);
 
