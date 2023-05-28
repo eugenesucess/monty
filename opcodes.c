@@ -51,7 +51,7 @@ void check_open_file(char **argv)
 	
 	while((len_size = getline(&buffer, &len, fd)) != EOF)
 	{
-		parsed = strtok(buffer, " \t\r\n");
+		/*parsed = strtok(buffer, " \t\r\n");
 		if (*parsed == '\0')
 			continue;
 		strcpy(command, parsed);
@@ -72,6 +72,8 @@ void check_open_file(char **argv)
 			
 			f = get_opcode(command);
 			f(&top, line_count);
+			*/
+		prinf("%s\n", buffer);
 		}
 		else
 		{
