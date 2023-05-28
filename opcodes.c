@@ -5,7 +5,7 @@
 
 int number;
 
-void (*get_opcode(char *parsed))(stack_t **top, unsigned int)
+void (*get_opcode(char *parsed,  unsigned int line))(stack_t **top, unsigned int)
 {
 	int i = 0;
 	instruction_t opt[] = {
@@ -24,39 +24,16 @@ void (*get_opcode(char *parsed))(stack_t **top, unsigned int)
 		{
 			return (opt[i].f);
 		}
+		else
+		{
+			fprintf(stderr, "unknown instruction");
+			exit(EXIT_FAILURE);
+		}
 		i++;
 	}
+	return NULL;
 }
 
-		/*parsed = strtok(buffer, " \t\r\n");
-		if (*parsed == '\0')
-			continue;
-		strcpy(command, parsed);
-		
-		if (parsed == NULL || parsed[0] == '#')
-			exit(EXIT_FAILURE);
-		if (strcmp(parsed, "push") == 0)
-		{
-			parsed = strtok(NULL, "\t\r\n");
-			
-			if (parsed == NULL || is_number(parsed) == -1)
-			{
-				fprintf(stderr, "not an intger");
-				exit(EXIT_FAILURE);
-			}
-			
-			number = atoi(parsed);
-			
-			f = get_opcode(command);
-			f(&top, line_count);
-			*/
-	/*	else
-		{
-			f = get_opcode(command);
-			f(&top, line_count);
-		}
-		line_count++;
-	}*/
 int is_number(char *parsed)
 {
 	int i;
