@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 {
 	void (*p_func)(stack_t **, unsigned int);
 	size_t size;
-	char *buffer, *token, *arg;
+	char *buffer, *token, *arg, *command;
 	FILE *fd;
 	unsigned int line_count = 1;
 	stack_t *head = NULL;
@@ -69,21 +69,24 @@ int main(int argc, char **argv)
 	while (getline(&buffer, &size, fd) != -1)
 	{
 		token = strtok(buffer, " t\r\n");
-		
-		if (strcmp(token, "push") == 0)
+		strcpy(command, token);
+		if (strcmp(command, "push") == 0)
 		{
 			arg = strtok(NULL, " \t\r\n");
 			token = strtok(NULL, "\n\t\r ");
 			if (token == NULL || is_number(token) == -1)
-				not_int_err(line_counter);
+			{
+				fprintf(stderr, "unknown instrunctions");
+				exit(EXIT_FAILURE);
+			}
 			
 			number = atoi(arg);
-			p_func = get_op_code(token);
+			p_func = get_opcode(token, line_count);
 			p_func(&head, line_count);
 		}
 		else
 		{
-			p_func = get_op_code(token);
+			p_func = get_opcode(command);
 			p_func(&head, line_count);
 		}
 		line_count++;
