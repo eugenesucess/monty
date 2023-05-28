@@ -78,12 +78,12 @@ int main(int argc, char **argv)
 				not_int_err(line_counter);
 			
 			number = atoi(arg);
-			p_func = get_op_code(token, line_count);
+			p_func = get_op_code(token);
 			p_func(&head, line_count);
 		}
 		else
 		{
-			p_func = get_op_code(token, line_count);
+			p_func = get_op_code(token);
 			p_func(&head, line_count);
 		}
 		line_count++;
