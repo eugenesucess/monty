@@ -25,6 +25,7 @@ void read_file(int argc, char **argv)
   }
   fclose(fd);
   free(buffer);
+}
 int main(int argc, char **argv)
 {
 read_file(argc, argv);
