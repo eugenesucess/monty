@@ -2,7 +2,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void check_open_file(char **argv)
+FILE *check_file(int argc, char **argv)
+{
+	FILE *fd;
+	
+	if (argc != 2)
+	{
+		fprintf(stderr, "few arg");
+		exitt(EXIT_FAILURE);
+	}
+	fd = fopen(argv[1], "r");
+	if (fd == NULL)
+	{
+		fprintf(stderr, "can't open file");
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		return (fd);
+	}
+}
+
+void read_file(FILE *file)
+{
+	size_t size;
+	ssize_t line_count = 1;
+	char *buffer;
+	
+	while (getline(&buffer, &size, file) != EOF)
+	{
+		printf("%s\n", buffer);
+		line_count++;
+	}
+}
+/*void check_open_file(char **argv)
 {
 	void (*f)(stack_t **, unsigned int);
 	FILE *fd;
@@ -42,25 +75,23 @@ void check_open_file(char **argv)
 			
 			f = get_opcode(command);
 			f(&top, line_count);
-			*/
+		
 		}
-		/*else
+		else
 		{
 			f = get_opcode(command);
 			f(&top, line_count);
-		}*/
+		}
 		line_count++;
 	}
 	fclose(fd);
 	free(buffer);
 	free(top);
 }
+*/
 int main(int argc, char **argv) {
-	if (argc != 2)
-	{
-		fprintf(stderr, "few arguments");
-		exit(EXIT_FAILURE);
-	}
-	check_open_file(argv);
+	FILE *fd;
+	fd = check_file(argc, argv);
+	read_file(fd);
 	return 0;
 }
