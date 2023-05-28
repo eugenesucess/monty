@@ -9,7 +9,7 @@ FILE *check_file(int argc, char **argv)
 	if (argc != 2)
 	{
 		fprintf(stderr, "few arg");
-		exitt(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	fd = fopen(argv[1], "r");
 	if (fd == NULL)
@@ -17,24 +17,8 @@ FILE *check_file(int argc, char **argv)
 		fprintf(stderr, "can't open file");
 		exit(EXIT_FAILURE);
 	}
-	else
-	{
-		return (fd);
-	}
-}
-
-void read_file(FILE *file)
-{
-	size_t size;
-	ssize_t line_count = 1;
-	char *buffer;
-	
-	while (getline(&buffer, &size, file) != EOF)
-	{
-		printf("%s\n", buffer);
-		line_count++;
-	}
-}
+	printf("file");
+	return (fd);
 /*void check_open_file(char **argv)
 {
 	void (*f)(stack_t **, unsigned int);
