@@ -4,7 +4,7 @@
 int main(int argc, char **argv)
 {
   size_t size;
-  char **buffer;
+  char *buffer;
   FILE *fd;
   
   fd = fopen(argv[1], "r");
