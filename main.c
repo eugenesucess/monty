@@ -11,12 +11,12 @@ void check_input(int argc, char **argv)
 	fd = fopen(argv[1], "r");
 	if (argc != 2)
 	{
-		fprintf(stderr, "few arguments");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	if (fd == NULL)
 	{
-		fprintf(stderr, "can't open");
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 
