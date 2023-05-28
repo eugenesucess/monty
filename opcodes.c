@@ -36,7 +36,7 @@ void check_open_file(char **argv)
 {
 	void (*f)(stack_t **, unsigned int);
 	FILE *fd;
-	char *buffer, *parsed, command[1024];
+	char *buffer = NULL, *parsed = NULL, command[1024];
 	size_t len = 0;
 	ssize_t len_size;
 	unsigned int line_count = 1;
@@ -73,13 +73,12 @@ void check_open_file(char **argv)
 			f = get_opcode(command);
 			f(&top, line_count);
 			*/
-		prinf("%s\n", buffer);
 		}
-		else
+		/*else
 		{
 			f = get_opcode(command);
 			f(&top, line_count);
-		}
+		}*/
 		line_count++;
 	}
 	fclose(fd);
