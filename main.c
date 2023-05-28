@@ -1,7 +1,9 @@
+#include "monty.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+int number;
 void check_input(int argc, char **argv)
 {  
 	FILE *fd;
@@ -18,11 +20,15 @@ void check_input(int argc, char **argv)
 	}
 
 }
+
 int main(int argc, char **argv)
 {
 	size_t size;
 	char *buffer, *token, *arg;
 	FILE *fd;
+	unsigned int line_count = 1;
+	stack_t **head = NULL;
+	
 	fd = fopen(argv[1], "r");
 	check_input(argc, argv);
 	while (getline(&buffer, &size, fd) != -1)
@@ -31,15 +37,15 @@ int main(int argc, char **argv)
 		
 		if (strcmp(token, "push") == 0)
 		{
-			printf("I\'m going to push\n");
 			arg = strtok(NULL, " \t\r\n");
-			printf("my arg is %s\n", arg);
+			number = atoi(arg);
+			push_stack(head, line_count);
 		}
 		else
 		{
-			printf("Its not push\n");
+			pall_stack(head, line_count);
 		}
-	printf("%s\n", buffer);
+		line_count++;
 	}
 	fclose(fd);
 	free(buffer);
