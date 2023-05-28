@@ -21,13 +21,48 @@ void check_input(int argc, char **argv)
 
 }
 
+/**
+ * is_number - check if string received is int or not
+ * @token: string to check
+ * Return: -1 if sring is not int or 1 if yes
+ */
+int is_number(char *token)
+{
+	int i;
+
+	if (token == NULL)
+		return (-1);
+
+	for (i = 0; token[i] != '\0'; i++)
+	{
+		if (token[i] != '-' && isdigit(token[i]) == 0)
+			return (-1);
+	}
+	return (1);
+}
+/**
+ * is_comment - check if string received is # or not
+ * @token: string to check
+ * @line_counter: line
+ * Return: -1 if sring is not # or 1 if yes
+ */
+int is_comment(char *token, int line_counter)
+{
+	if (token == NULL || token[0] == '#')
+	{
+	line_counter++;
+	return (1);
+	}
+	return (-1);
+}
 int main(int argc, char **argv)
 {
+	void (*p_func)(stack_t **, unsigned int);
 	size_t size;
 	char *buffer, *token, *arg;
 	FILE *fd;
 	unsigned int line_count = 1;
-	stack_t **head = NULL;
+	stack_t *head = NULL;
 	
 	fd = fopen(argv[1], "r");
 	check_input(argc, argv);
@@ -38,12 +73,18 @@ int main(int argc, char **argv)
 		if (strcmp(token, "push") == 0)
 		{
 			arg = strtok(NULL, " \t\r\n");
+			token = strtok(NULL, "\n\t\r ");
+			if (token == NULL || is_number(token) == -1)
+				not_int_err(line_counter);
+			
 			number = atoi(arg);
-			push_stack(head, line_count);
+			p_func = get_op_code(token, line_count);
+			p_func(&head, line_count);
 		}
 		else
 		{
-			pall_stack(head, line_count);
+			p_func = get_op_code(token, line_count);
+			p_func(&head, line_count);
 		}
 		line_count++;
 	}
