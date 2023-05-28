@@ -35,10 +35,26 @@ void pall_stack(stack_t **top, unsigned int line_number)
 {
 	stack_t *ptr;
 	(void)line_number;
-	
+	ptr = *top;
+
 	while (ptr != NULL)
 	{
 		printf("%d\n", ptr->n);
 		ptr = ptr->next;
 	}
+}
+
+void free_stack(stack_t *top)
+{
+	stack_t *temp;
+
+	if (top == NULL)
+		return;
+	while (top != NULL)
+	{
+		temp = top;
+		top = top->next;
+		free(temp);
+	}
+	free(top);
 }
