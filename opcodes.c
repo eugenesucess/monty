@@ -24,34 +24,10 @@ void (*get_opcode(char *parsed))(stack_t **top, unsigned int)
 		{
 			return (opt[i].f);
 		}
-		else
-		{
-			exit(EXIT_FAILURE);
-		}
 		i++;
 	}
 }
 
-void check_open_file(char **argv)
-{
-	void (*f)(stack_t **, unsigned int);
-	FILE *fd;
-	char *buffer, *parsed, command[1024];
-	size_t len = 0;
-	ssize_t len_size;
-	unsigned int line_count = 1;
-	stack_t *top = NULL;
-	
-	fd = fopen(argv[1], "r");
-	if (fd = NULL)
-	{
-		fprintf(stderr, "can't open file'");
-		exit(EXIT_FAILURE);
-	}
-	
-	while((len_size = getline(&buffer, &len, fd)) != EOF)
-	{
-		printf("%s\n", buffer);
 		/*parsed = strtok(buffer, " \t\r\n");
 		if (*parsed == '\0')
 			continue;
@@ -74,8 +50,6 @@ void check_open_file(char **argv)
 			f = get_opcode(command);
 			f(&top, line_count);
 			*/
-		printf("%s\n", buffer);
-		}
 	/*	else
 		{
 			f = get_opcode(command);
@@ -83,10 +57,6 @@ void check_open_file(char **argv)
 		}
 		line_count++;
 	}*/
-	fclose(fd);
-	free(buffer);
-	free(top);
-}
 int is_number(char *parsed)
 {
 	int i;
