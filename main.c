@@ -29,11 +29,15 @@ void read_file(FILE *file)
 	ssize_t line_count = 1;
 	char *buffer;
 	
-	while (getline(&buffer, &size, file) != EOF)
+	buffer = malloc(1024);
+	
+	while (getline(&buffer, &size, file) != -1)
 	{
 		printf("%s\n", buffer);
 		line_count++;
 	}
+	free(file);
+	free(buffer);
 }
 /*void check_open_file(char **argv)
 {
