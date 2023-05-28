@@ -1,6 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+#include <ctype.h>
 extern int n;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -33,8 +34,8 @@ typedef struct instruction_s
 } instruction_t;
 
 int is_number(char *parsed);
-void check_open_file(char **argv)
-void (*get_opcode(char *parsed))(stack_t **top, unsigned int)
+void check_open_file(char **argv);
+void (*get_opcode(char *parsed))(stack_t **top, unsigned int);
 
 void push_stack(stack_t **top, unsigned int line_number);
 void pall_stack(stack_t **top, unsigned int line_number);

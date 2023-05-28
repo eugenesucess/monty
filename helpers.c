@@ -1,6 +1,6 @@
 #include "monty.h"
+#include <stdlib.h>
 #include <stdio.h>
-#Inclued <stdlib.h>
 int number;
 
 /*add node at the beg of the stack*/
@@ -12,7 +12,7 @@ void push_stack(stack_t **top, unsigned int line_number)
 	newNode = malloc(sizeof(stack_t));
 	if (!newNode)
 	{
-		fprint(stderr, "Can't malloc'");
+		fprintf(stderr, "Can't malloc'");
 		exit(EXIT_FAILURE);
 	}
 	

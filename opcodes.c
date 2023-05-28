@@ -1,4 +1,6 @@
 #include "monty.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 int number;
@@ -24,7 +26,6 @@ void (*get_opcode(char *parsed))(stack_t **top, unsigned int)
 		}
 		else
 		{
-			fprintf(stderr, "L%u: unknown instruction %s\n", line, invInstruction);
 			exit(EXIT_FAILURE);
 		}
 		i++;
@@ -35,7 +36,7 @@ void check_open_file(char **argv)
 {
 	void (*f)(stack_t **, unsigned int);
 	FILE *fd;
-	char *buffer, *parsed, *command;
+	char *buffer, *parsed, command[1024];
 	size_t len = 0;
 	ssize_t len_size;
 	unsigned int line_count = 1;
@@ -44,19 +45,19 @@ void check_open_file(char **argv)
 	fd = fopen(argv[1], "r");
 	if (fd = NULL)
 	{
-		fprint(stderr, "can't open file'");
+		fprintf(stderr, "can't open file'");
 		exit(EXIT_FAILURE);
 	}
 	
 	while((len_size = getline(&buffer, &len, fd)) != EOF)
 	{
 		parsed = strtok(buffer, " \t\r\n");
-		if (parsed == '\0')
+		if (*parsed == '\0')
 			continue;
 		strcpy(command, parsed);
 		
 		if (parsed == NULL || parsed[0] == '#')
-			return(1);
+			exit(EXIT_FAILURE);
 		if (strcmp(parsed, "push") == 0)
 		{
 			parsed = strtok(NULL, "\t\r\n");
